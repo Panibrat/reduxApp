@@ -1,4 +1,6 @@
 "use strict"
+import React from 'react';
+import {render} from 'react-dom';
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
 //STEP 3 define reducers
@@ -6,6 +8,8 @@ import reducers from './reducers/index';
 
 import {addToCart} from './actions/cartActions';
 import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
+
+import BooksList from './components/pages/booksList';
 
 // STEP 1 create the store
 const middeleware = applyMiddleware(logger);
@@ -15,6 +19,11 @@ store.subscribe(function() {
   //console.log('current price: ', store.getState().price);
 });
 // STEP 2 create and dispatch actions
+
+render(
+  <BooksList />, document.getElementById('app')
+);
+
 
 store.dispatch(postBooks(
     [{
