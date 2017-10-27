@@ -2,6 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getBooks} from '../../actions/booksActions';
+import { Button, Grid, Row, Col } from 'react-bootstrap';
+import BookItem from './BookItem';
+import BooksForm from './booksForm';
+
 
 class BooksList extends React.Component {
   componentDidMount() {
@@ -14,18 +18,27 @@ class BooksList extends React.Component {
   render() {
     const booksList = this.props.books.map((arrayBook) => {
       return (
-        <div key={arrayBook.id}>
-          <h3>Title: {arrayBook.title}</h3>
-          <h4>Description: {arrayBook.description}</h4>
-          <h4>price: {arrayBook.price}</h4>
-        </div>
+        <Col xs={12} sm={6} md={4} key={arrayBook.id}>
+          <BookItem
+              id={arrayBook.id}
+              title={arrayBook.title}
+              description={arrayBook.description}
+              price={arrayBook.price}
+          />
+        </Col>
       )
     })
+
     return (
-      <div>
-        <h1> Books List </h1>
-        {booksList}
-      </div>
+      <Grid style={{marginTop:'50px'}}>
+        <Row>
+          <h1> Books List </h1>
+          <Col xs={12} sm={6} md={4}>
+            <BooksForm/>
+          </Col>
+          {booksList}
+        </Row>
+      </Grid>
     )
   }
 }
