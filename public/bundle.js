@@ -44181,6 +44181,63 @@ var Cart = function (_React$Component) {
                 'h6',
                 null,
                 cartArr.title
+              ),
+              _react2.default.createElement(
+                'span',
+                null,
+                '    '
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h6',
+                null,
+                'usd. ',
+                cartArr.price
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 12, sm: 2 },
+              _react2.default.createElement(
+                'h6',
+                null,
+                'qty. ',
+                _react2.default.createElement(
+                  _reactBootstrap.Label,
+                  { bsStyle: 'success' },
+                  '8'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { xs: 6, sm: 4 },
+              _react2.default.createElement(
+                _reactBootstrap.ButtonGroup,
+                { style: { minWidth: '300px' } },
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'default', bsSize: 'small' },
+                  '-'
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'default', bsSize: 'small' },
+                  '+'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  null,
+                  ' '
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { bsStyle: 'danger', bsSize: 'small' },
+                  'DELETE'
+                )
               )
             )
           )
