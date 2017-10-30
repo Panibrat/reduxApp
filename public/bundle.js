@@ -32388,18 +32388,18 @@ function booksReducers() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     books: [{
       _id: 1,
-      title: '1this is the book title',
+      title: 'First Book',
       description: 'this is the book description ',
-      price: 100
+      price: 10.25
     }, {
       _id: 2,
-      title: '2this is the book title2',
-      description: '2this is the book description2 ',
-      price: 200
+      title: 'Second',
+      description: 'Description for Second',
+      price: 22.88
     }, {
       _id: 3,
-      title: '3this is the book title',
-      description: '33this is the book description ',
+      title: 'Learn React',
+      description: '24h and you winner!!!',
       price: 300.30
     }]
   };
@@ -32420,7 +32420,7 @@ function booksReducers() {
       break;
     case "UPDATE_BOOK":
       books = state.books.map(function (book) {
-        if (action.payload._id === book.__id) {
+        if (action.payload._id === book._id) {
           book = _extends({}, book, {
             title: action.payload.title
           });
