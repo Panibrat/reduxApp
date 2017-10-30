@@ -15,16 +15,16 @@ class BooksForm extends React.Component {
     }
 
   handleSubmit(){
-    console.log("SAVE");
     const book = [
       {
+        //id: 12121,
         title: findDOMNode(this.refs.title).value,
+        //title: this.refs.title.value + '!?!?', - doesn't work with react-bootstrap component
         description:  findDOMNode(this.refs.description).value,
         price: findDOMNode(this.refs.price).value
       }
     ];
-    console.log(book);
-    postBooks(book);
+    this.props.postBooks(book);
   }
 
   render() {
@@ -61,9 +61,10 @@ class BooksForm extends React.Component {
     )
   }
 }
-
-
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({postBooks}, dispatch)
+  return bindActionCreators({
+    postBooks: postBooks
+  }, dispatch)
 };
+
 export default connect(null, mapDispatchToProps)(BooksForm);

@@ -17,7 +17,7 @@ import BooksList from './components/pages/booksList';
 const middeleware = applyMiddleware(logger);
 const store = createStore(reducers, middeleware);
 store.subscribe(function() {
-  //console.log('current state is: ', store.getState());
+  console.log('current state is: ', store.getState());
 });
 
 render(
@@ -36,4 +36,21 @@ store.dispatch(updateBooks(
     }
 ));
 // ADD TO CART
-store.dispatch(addToCart([{id:1}]));
+// store.dispatch(addToCart([
+//   {
+//     id: 77,
+//     title: '777this is the book title',
+//     description: '777this is the book description ',
+//     price: 77777
+//   }
+// ]));
+//store.dispatch(addToCart([{id: 88}]));
+
+// store.dispatch(postBooks([
+//   {
+//       id: 77,
+//       title: '777this is the book title',
+//       description: '777this is the book description ',
+//       price: 77777
+//   }
+// ]))
