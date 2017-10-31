@@ -17,11 +17,13 @@ class BooksList extends React.Component {
     console.log('componentDidUpdate');
   }
   render() {
+    //console.log("this.props.books++++++", this.props.books);
     const booksList = this.props.books.map((arrayBook) => {
+      //console.log("arrayBook++++++", arrayBook._id);
       return (
-        <Col xs={12} sm={6} md={4} key={arrayBook.id}>
+        <Col xs={12} sm={6} md={4} key={arrayBook._id}>
           <BookItem
-              id={arrayBook.id}
+              _id={arrayBook._id}
               title={arrayBook.title}
               description={arrayBook.description}
               price={arrayBook.price}

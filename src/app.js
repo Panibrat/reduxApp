@@ -8,7 +8,7 @@ import logger from 'redux-logger';
 
 import reducers from './reducers/index';
 
-import {addToCart} from './actions/cartActions';
+import {addToCart, deleteCartItem} from './actions/cartActions';
 import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
 
 import BooksList from './components/pages/booksList';
@@ -27,24 +27,29 @@ render(
 );
 
 
-store.dispatch(deleteBooks({id:3}));
+store.dispatch(deleteBooks({_id:3}));
 //store.dispatch(deleteBooks({id:2}));
 store.dispatch(updateBooks(
     {
-        id: 1,
-        title: 'Learn React in 24h'
+        _id: 1,
+        title: 'Learn React in 244h'
     }
 ));
-// ADD TO CART
-// store.dispatch(addToCart([
-//   {
-//     id: 77,
-//     title: '777this is the book title',
-//     description: '777this is the book description ',
-//     price: 77777
-//   }
-// ]));
-//store.dispatch(addToCart([{id: 88}]));
+//ADD TO CART
+store.dispatch(addToCart([
+  {
+    _id: 77,
+    title: '777this is the book title',
+    description: '777this is the book description ',
+    price: 77777
+  }
+]));
+store.dispatch(addToCart([{_id: 88}]));
+
+store.dispatch(deleteCartItem({_id: 77}));
+store.dispatch(deleteCartItem({_id: 88}));
+
+store.dispatch(addToCart([  {_id: 1} ]));
 
 // store.dispatch(postBooks([
 //   {

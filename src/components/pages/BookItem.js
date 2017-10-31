@@ -13,6 +13,7 @@ class BookItem extends React.Component {
     this.handleCart = this.handleCart.bind(this);
   }
   handleCart() {
+    console.log("item===>", this.props);
     const book = [{
       _id: this.props._id,
       title: this.props.title,
@@ -28,6 +29,7 @@ class BookItem extends React.Component {
       <Well>
         <Row>
           <Col xs={12}>
+            <p>id: {this.props._id}</p>
             <h6>{this.props.title}</h6>
             <p>{this.props.description}</p>
             <h6>price: {this.props.price}</h6>

@@ -16,7 +16,7 @@ export function booksReducers(state = {
     {
         _id: 3,
         title: 'Learn React',
-        description: '24h and you winner!!!',
+        description: '4424h and you winner!!!',
         price: 300.30
     }
 
