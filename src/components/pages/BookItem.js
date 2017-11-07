@@ -13,12 +13,12 @@ class BookItem extends React.Component {
     this.handleCart = this.handleCart.bind(this);
   }
   handleCart() {
-    console.log("item===>", this.props);
     const book = [{
       _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
-      price: this.props.price
+      price: this.props.price,
+      quantity: 1
     }]
 
     this.props.addToCart(book)

@@ -7,23 +7,9 @@ import {bindActionCreators} from 'redux';
 import {deleteCartItem} from '../../actions/cartActions';
 
 class Cart extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleDeleteCartItem = this.handleDeleteCartItem.bind(this);
-  // }
-
-
-//store.dispatch(deleteCartItem({_id: 88}));
-
-
   handleDeleteCartItem(itemToDelete) {
-    console.log("item------->", itemToDelete);
-    //console.log("this------->", this);
-    //console.log("refs------->", this.refs);
     this.props.deleteCartItem(itemToDelete);
   }
-
-
 
   render() {
     if (this.props.cart[0]) {
@@ -49,7 +35,7 @@ class Cart extends React.Component {
                 <h6>usd. {cartArr.price}</h6>
             </Col>
             <Col xs={12} sm={2}>
-              <h6>qty. <Label bsStyle="success">8</Label></h6>
+              <h6>qty. <Label bsStyle="success">{cartArr.quantity}</Label></h6>
             </Col>
             <Col xs={6} sm={4}>
               <ButtonGroup style={{minWidth:'300px'}}>
