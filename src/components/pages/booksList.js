@@ -7,7 +7,6 @@ import BookItem from './BookItem';
 import BooksForm from './booksForm';
 import Cart from './cart';
 
-
 class BooksList extends React.Component {
   componentDidMount() {
     this.props.getBooks();

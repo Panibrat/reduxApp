@@ -77,29 +77,16 @@ describe('Book Reducer', () => {
   });
 
   test('Should updete a book in case of UPDATE_BOOK', () => {
+    const title = 'Was First Book';
     const action = {
       type: "UPDATE_BOOK",
       payload: {
         _id: 1,
-        title: 'Was First Book',
-        description: 'Was this is the book description ',
-        price: 999.99
+        title: title,
        }
     }
     const newState = booksReducers(state, action);
-    expect(newState).toEqual({
-        books:[
-          {
-              _id: 1,
-              title: 'Was First Book',
-              description: 'this is the book description ',
-              price: 10.25
-          },
-          state.books[1],
-          state.books[2]
-        ]
-
-    });
+    expect(newState.books[0].title).toEqual(title);
   });
 
   test('Should NOT update any book with wrong id in case of UPDATE_BOOK', () => {
@@ -113,14 +100,7 @@ describe('Book Reducer', () => {
        }
     }
     const newState = booksReducers(state, action);
-    expect(newState).toEqual({
-        books:[
-          state.books[0],
-          state.books[1],
-          state.books[2]
-        ]
-
-    });
+    expect(newState).toEqual(state);
   });
 
 
