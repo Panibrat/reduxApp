@@ -4,7 +4,7 @@
   "description": "first redux app",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
