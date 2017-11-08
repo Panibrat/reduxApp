@@ -1,5 +1,5 @@
-const sum = require('./sum');
-
+//const sum = require('./sum');
+import sum from './sum';
 
 describe('lolololo', () => {
 
