@@ -1,1 +1,1 @@
-## Learn Redux
+## React + Redux + Jest + NodeJS + MongoDB
