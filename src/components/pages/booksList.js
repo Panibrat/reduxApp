@@ -6,19 +6,18 @@ import { Button, Grid, Row, Col } from 'react-bootstrap';
 import BookItem from './BookItem';
 import BooksForm from './booksForm';
 import Cart from './cart';
+import Time from './Time';
 
-class BooksList extends React.Component {
+export class BooksList extends React.Component {
   componentDidMount() {
     this.props.getBooks();
-    console.log('componentDidMount');
+    //console.log('componentDidMount');
   }
   componentDidUpdate() {
-    console.log('componentDidUpdate');
+    //console.log('componentDidUpdate');
   }
   render() {
-    //console.log("this.props.books++++++", this.props.books);
     const booksList = this.props.books.map((arrayBook) => {
-      //console.log("arrayBook++++++", arrayBook._id);
       return (
         <Col xs={12} sm={6} md={4} key={arrayBook._id}>
           <BookItem
@@ -39,6 +38,7 @@ class BooksList extends React.Component {
           </Col>
         </Row>
         <Row>
+          <Time />
           <h1> Books List </h1>
           <Col xs={12} sm={6} md={4}>
             <BooksForm/>
