@@ -38,10 +38,26 @@ store.dispatch(updateBooks(
 //ADD TO CART
 store.dispatch(addToCart([
   {
+    _id: 55,
+    title: '777this is the book title',
+    description: '777this is the book description ',
+    price: 77777,
+    quantity: 7
+
+  },
+  {
     _id: 77,
     title: '777this is the book title',
     description: '777this is the book description ',
-    price: 77777
+    price: 77777,
+    quantity: 1
+  },
+  {
+    _id: 99,
+    title: '888this is the book title',
+    description: '887this is the book description ',
+    price: 888,
+    quantity: 12
   }
 ]));
 store.dispatch(addToCart([{_id: 88}]));
@@ -49,7 +65,7 @@ store.dispatch(addToCart([{_id: 88}]));
 store.dispatch(deleteCartItem({_id: 77}));
 store.dispatch(deleteCartItem({_id: 88}));
 
-store.dispatch(addToCart([  {_id: 1} ]));
+//store.dispatch(addToCart([  {_id: 1} ]));
 
 // store.dispatch(postBooks([
 //   {

@@ -8,7 +8,7 @@ import {findDOMNode} from 'react-dom';
 import {postBooks} from '../../actions/booksActions';
 
 
-class BooksForm extends React.Component {
+export class BooksForm extends React.Component {
   constructor(props) {
       super(props);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,7 +36,7 @@ class BooksForm extends React.Component {
             <FormControl
               type="text"
               ref="title"
-              placeholder="Enter title"
+              placeholder="Enter title"              
           />
           </FormGroup>
           <FormGroup controlId="description">

@@ -1,14 +1,45 @@
 import React from 'react';
-import {Well, Panel, Col, Row, Button, ButtonGroup, Label} from 'react-bootstrap';
+import {Modal, Well, Panel, Col, Row, Button, ButtonGroup, Label} from 'react-bootstrap';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {deleteCartItem} from '../../actions/cartActions';
+import {deleteCartItem, updateCart} from '../../actions/cartActions';
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+  }
+
+  close(){
+    this.setState({
+      showModal: false
+    });
+  }
+
+  open(){
+    this.setState({
+      showModal: true
+    });
+  }
+
   handleDeleteCartItem(itemToDelete) {
     this.props.deleteCartItem(itemToDelete);
+  }
+  onIncrement(_id) {
+    this.props.updateCart(_id, 1);
+    //console.log('+');
+  }
+
+  onDecrement(_id, quantity) {
+    if(quantity > 1) {
+        this.props.updateCart(_id, -1);
+    }
   }
 
   render() {
@@ -39,10 +70,10 @@ class Cart extends React.Component {
             </Col>
             <Col xs={6} sm={4}>
               <ButtonGroup style={{minWidth:'300px'}}>
-                <Button bsStyle="default" bsSize="small">
+                <Button bsStyle="default" bsSize="small" onClick={this.onDecrement.bind(this, cartArr._id, cartArr.quantity)}>
                   -
                 </Button>
-                <Button bsStyle="default" bsSize="small">
+                <Button bsStyle="default" bsSize="small" onClick={this.onIncrement.bind(this, cartArr._id)}>
                   +
                 </Button>
                 <span> </span>
@@ -58,6 +89,34 @@ class Cart extends React.Component {
     return (
       <Panel header="Cart" bsStyle="primary">
         {cartItemsList}
+        <Row>
+          <Col xs={12}>
+            <h6>
+              Total amount: {4444} $
+            </h6>
+            <Button bsStyle="success" bsSize="small" onClick={this.open}>
+              PROCCEED TO CHECKOUT
+            </Button>
+            <Modal show={this.state.showModal} onHide={this.close}>
+         <Modal.Header closeButton>
+           <Modal.Title>Thank you!</Modal.Title>
+         </Modal.Header>
+         <Modal.Body>
+           <h4>Your order has been saved...</h4>
+           <p> Вышлем письмо</p>
+
+         </Modal.Body>
+         <Modal.Footer>
+           <Col xs={6}>
+             <h6>
+               Total amount {1230} $
+             </h6>
+           </Col>
+           <Button onClick={this.close}>Close</Button>
+         </Modal.Footer>
+       </Modal>
+          </Col>
+        </Row>
       </Panel>
     )
   }
@@ -69,7 +128,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    deleteCartItem: deleteCartItem
+    deleteCartItem: deleteCartItem,
+    updateCart: updateCart
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

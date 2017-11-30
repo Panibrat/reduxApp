@@ -8,7 +8,6 @@ export default class Time extends React.Component {
   }
 
   tick() {
-    //console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
     this.setState(() => ({
       time: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
     }));
