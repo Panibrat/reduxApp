@@ -12,6 +12,8 @@ import {addToCart, deleteCartItem} from './actions/cartActions';
 import {postBooks, deleteBooks, updateBooks} from './actions/booksActions';
 
 import BooksList from './components/pages/booksList';
+import Menu from './components/menu';
+import Footer from './components/footer';
 
 const middeleware = applyMiddleware(logger);
 const store = createStore(reducers, middeleware);
@@ -21,6 +23,10 @@ store.subscribe(function() {
 
 render(
   <Provider store = {store} >
-    <BooksList />
+    <div>
+      <Menu />
+      <BooksList />
+      <Footer />
+    </div>
   </Provider>, document.getElementById('app')
 );

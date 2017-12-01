@@ -31,7 +31,7 @@ export function booksReducers(state = {
       break;
     case "DELETE_BOOK":
       let books = state.books.filter((book) => {
-        return action.payload._id !== book._id;
+        return action.payload._id != book._id;
       })
       return {...state, books:[...books]};
       break;

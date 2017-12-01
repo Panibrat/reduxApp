@@ -34933,6 +34933,14 @@ var _booksList = __webpack_require__(468);
 
 var _booksList2 = _interopRequireDefault(_booksList);
 
+var _menu = __webpack_require__(613);
+
+var _menu2 = _interopRequireDefault(_menu);
+
+var _footer = __webpack_require__(614);
+
+var _footer2 = _interopRequireDefault(_footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var middeleware = (0, _redux.applyMiddleware)(_reduxLogger2.default);
@@ -34944,7 +34952,13 @@ store.subscribe(function () {
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
   { store: store },
-  _react2.default.createElement(_booksList2.default, null)
+  _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_menu2.default, null),
+    _react2.default.createElement(_booksList2.default, null),
+    _react2.default.createElement(_footer2.default, null)
+  )
 ), document.getElementById('app'));
 
 /***/ }),
@@ -48195,7 +48209,7 @@ function booksReducers() {
       break;
     case "DELETE_BOOK":
       var books = state.books.filter(function (book) {
-        return action.payload._id !== book._id;
+        return action.payload._id != book._id;
       });
       return _extends({}, state, { books: [].concat(_toConsumableArray(books)) });
       break;
@@ -59888,7 +59902,7 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
     key: 'onDelete',
     value: function onDelete() {
       var id = (0, _reactDom.findDOMNode)(this.refs.delete).value;
-      var bookToDelete = { _id: +id };
+      var bookToDelete = { _id: id };
       this.props.deleteBooks(bookToDelete);
     }
   }, {
@@ -59973,7 +59987,7 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
               _react2.default.createElement(
                 'option',
                 { value: 'select' },
-                'select book\'s id to delete'
+                'select'
               ),
               booksList
             )
@@ -60636,6 +60650,175 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 612;
+
+/***/ }),
+/* 613 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBootstrap = __webpack_require__(75);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
+// import {findDOMNode} from 'react-dom';
+// import {postBooks, deleteBooks} from '../../actions/booksActions';
+
+var Menu = function (_React$Component) {
+  _inherits(Menu, _React$Component);
+
+  function Menu() {
+    _classCallCheck(this, Menu);
+
+    return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).apply(this, arguments));
+  }
+
+  _createClass(Menu, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactBootstrap.Navbar,
+          { inverse: true, fixedTop: true },
+          _react2.default.createElement(
+            _reactBootstrap.Navbar.Header,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Navbar.Brand,
+              null,
+              _react2.default.createElement(
+                'a',
+                { href: '#' },
+                'React-Bootstrap'
+              )
+            ),
+            _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Navbar.Collapse,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Nav,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.NavItem,
+                { eventKey: 1, href: '/about' },
+                'About'
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.NavItem,
+                { eventKey: 2, href: '/contacts' },
+                'Contact Us'
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Nav,
+              { pullRight: true },
+              _react2.default.createElement(
+                _reactBootstrap.NavItem,
+                { eventKey: 1, href: '/admin' },
+                'Admin'
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.NavItem,
+                { eventKey: 2, href: '/cart' },
+                'You Cart ',
+                _react2.default.createElement(
+                  _reactBootstrap.Badge,
+                  { className: 'badge' },
+                  '1'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Menu;
+}(_react2.default.Component);
+
+exports.default = Menu;
+
+/***/ }),
+/* 614 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Footer = function (_React$Component) {
+  _inherits(Footer, _React$Component);
+
+  function Footer() {
+    _classCallCheck(this, Footer);
+
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "footer",
+        { className: "footer text-center" },
+        _react2.default.createElement(
+          "div",
+          { className: "container" },
+          _react2.default.createElement(
+            "p",
+            { className: "footer-text" },
+            "Copyright 2017 BooksShop. All rights reserved"
+          )
+        )
+      );
+    }
+  }]);
+
+  return Footer;
+}(_react2.default.Component);
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);

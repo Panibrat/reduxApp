@@ -30,7 +30,7 @@ export class BooksForm extends React.Component {
 
     onDelete(){
       var id = findDOMNode(this.refs.delete).value
-      var bookToDelete = {_id: +id}
+      var bookToDelete = {_id: id}
       this.props.deleteBooks(bookToDelete);
   }
 
@@ -71,7 +71,7 @@ export class BooksForm extends React.Component {
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>Select book to deleteeee</ControlLabel>
             <FormControl ref="delete" componentClass="select" placeholder="select">
-              <option value="select">select book's id to delete</option>
+              <option value="select">select</option>
               {booksList}
             </FormControl>
           </FormGroup>
