@@ -34938,7 +34938,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var middeleware = (0, _redux.applyMiddleware)(_reduxLogger2.default);
 var store = (0, _redux.createStore)(_index2.default, middeleware);
 store.subscribe(function () {
-  console.log('current state is: ', store.getState());
+  //console.log('current state is: ', store.getState());
 });
 
 (0, _reactDom.render)(_react2.default.createElement(
@@ -34946,49 +34946,6 @@ store.subscribe(function () {
   { store: store },
   _react2.default.createElement(_booksList2.default, null)
 ), document.getElementById('app'));
-
-store.dispatch((0, _booksActions.deleteBooks)({ _id: 3 }));
-//store.dispatch(deleteBooks({id:2}));
-store.dispatch((0, _booksActions.updateBooks)({
-  _id: 1,
-  title: 'Learn React in 244h'
-}));
-//ADD TO CART
-store.dispatch((0, _cartActions.addToCart)([{
-  _id: 55,
-  title: '777this is the book title',
-  description: '777this is the book description ',
-  price: 77777,
-  quantity: 7
-
-}, {
-  _id: 77,
-  title: '777this is the book title',
-  description: '777this is the book description ',
-  price: 77777,
-  quantity: 1
-}, {
-  _id: 99,
-  title: '888this is the book title',
-  description: '887this is the book description ',
-  price: 888,
-  quantity: 12
-}]));
-store.dispatch((0, _cartActions.addToCart)([{ _id: 88 }]));
-
-store.dispatch((0, _cartActions.deleteCartItem)({ _id: 77 }));
-store.dispatch((0, _cartActions.deleteCartItem)({ _id: 88 }));
-
-//store.dispatch(addToCart([  {_id: 1} ]));
-
-// store.dispatch(postBooks([
-//   {
-//       id: 77,
-//       title: '777this is the book title',
-//       description: '777this is the book description ',
-//       price: 77777
-//   }
-// ]))
 
 /***/ }),
 /* 340 */
@@ -48263,56 +48220,79 @@ function booksReducers() {
 
 "use strict";
 
-
-//CART REDUCERS
+// CART REDUCERS
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 exports.cartReducers = cartReducers;
+exports.totals = totals;
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function cartReducers() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
-    var action = arguments[1];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
+  var action = arguments[1];
 
-    switch (action.type) {
-        case "ADD_TO_CART":
-            return { cart: [].concat(_toConsumableArray(state.cart), _toConsumableArray(action.payload)) };
-            break;
+  switch (action.type) {
 
-        case "DELETE_CART_ITEM":
-            var cartToReturn = state.cart.filter(function (cart_item) {
-                return action.payload._id !== cart_item._id;
-            });
-            console.log("---action.payload--->", action.payload);
-            console.log("---state.cart--->", state.cart);
-            return _extends({}, state, { cart: [].concat(_toConsumableArray(cartToReturn)) });
-            break;
+    case "ADD_TO_CART":
+      return {
+        cart: [].concat(_toConsumableArray(state.cart), [action.payload]),
+        totalAmount: totals([].concat(_toConsumableArray(state.cart), [action.payload])).amount,
+        totalQty: totals([].concat(_toConsumableArray(state.cart), [action.payload])).qty
+      };
+      break;
 
-        case "UPDATE_CART":
-            var cartToUpdate = state.cart.map(function (cart_item) {
-                if (action._id == cart_item._id) {
-                    cart_item.quantity += action.unit;
-                }
-                return cart_item;
-            });
+    case "DELETE_CART_ITEM":
+      var cartToReturn = state.cart.filter(function (cart_item) {
+        return action.payload._id !== cart_item._id;
+      });
+      return _extends({}, state, {
+        cart: [].concat(_toConsumableArray(cartToReturn)),
+        totalAmount: totals(cartToReturn).amount,
+        totalQty: totals(cartToReturn).qty
+      });
+      break;
 
-            return _extends({}, state, { cart: [].concat(_toConsumableArray(cartToUpdate)) });
-            break;
-    }
-    return state;
+    case "UPDATE_CART":
+      var cartToUpdate = state.cart.map(function (cart_item) {
+        if (action._id == cart_item._id) {
+          cart_item.quantity += action.unit;
+        }
+        return cart_item;
+      });
+
+      return _extends({}, state, {
+        cart: [].concat(_toConsumableArray(cartToUpdate)),
+        totalAmount: totals(cartToUpdate).amount,
+        totalQty: totals(cartToUpdate).qty
+      });
+      break;
+  }
+  return state;
 }
-// export function updateCart(_id, unit) {
-//     return {
-//         type:"UPDATE_CART",
-//         _id: _id,
-//         unit: unit
-//     }
+
+// CALCULATE TOTALS
+function totals(cartArray) {
+  //console.log('\n cartArray \n', cartArray);
+  var totalAmount = cartArray.reduce(function (sum, item) {
+    //console.log('\n item \n', item);
+    return sum += item.quantity * item.price;
+  }, 0);
+
+  var totalQty = cartArray.reduce(function (sum, item) {
+    return sum += item.quantity;
+  }, 0);
+  //console.log('\n total \n', {  amount: totalAmount.toFixed(2),  qty: totalQty});
+  return {
+    amount: totalAmount.toFixed(2),
+    qty: totalQty
+  };
+}
 
 /***/ }),
 /* 468 */
@@ -48415,7 +48395,6 @@ var BooksList = exports.BooksList = function (_React$Component) {
         _react2.default.createElement(
           _reactBootstrap.Row,
           null,
-          _react2.default.createElement(_Time2.default, null),
           _react2.default.createElement(
             'h1',
             null,
@@ -59757,13 +59736,13 @@ var BookItem = function (_React$Component) {
   _createClass(BookItem, [{
     key: 'handleCart',
     value: function handleCart() {
-      var book = [{
+      var book = {
         _id: this.props._id,
         title: this.props.title,
         description: this.props.description,
         price: this.props.price,
         quantity: 1
-      }];
+      };
       if (this.props.cart.length > 0) {
         //CART IS NOT EMPTY
         var _id = this.props._id;
@@ -60058,11 +60037,20 @@ var Cart = function (_React$Component) {
       }
     }
   }, {
+    key: 'getTotal',
+    value: function getTotal(cartArray) {
+      var total = cartArray.reduce(function (sum, item) {
+        return sum += item.quantity * item.price;
+      }, 0);
+      return total.toFixed(2);
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (this.props.cart[0]) {
         return this.renderCart();
       } else {
+
         return this.renderEmpty();
       }
     }
@@ -60166,8 +60154,14 @@ var Cart = function (_React$Component) {
               'h6',
               null,
               'Total amount: ',
-              4444,
-              ' $'
+              this.props.totalAmount,
+              '$'
+            ),
+            _react2.default.createElement(
+              'h6',
+              null,
+              'Items: ',
+              this.props.totalQty
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
@@ -60210,8 +60204,8 @@ var Cart = function (_React$Component) {
                     'h6',
                     null,
                     'Total amount ',
-                    1230,
-                    ' $'
+                    this.props.totalAmount,
+                    '$'
                   )
                 ),
                 _react2.default.createElement(
@@ -60231,7 +60225,11 @@ var Cart = function (_React$Component) {
 }(_react2.default.Component);
 
 function mapStateToProps(state) {
-  return { cart: state.carts.cart };
+  return {
+    cart: state.carts.cart,
+    totalAmount: state.carts.totalAmount,
+    totalQty: state.carts.totalQty
+  };
 }
 function mapDispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({

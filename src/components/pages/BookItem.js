@@ -13,13 +13,13 @@ class BookItem extends React.Component {
     this.handleCart = this.handleCart.bind(this);
   }
   handleCart() {
-    const book = [{
+    const book = {
       _id: this.props._id,
       title: this.props.title,
       description: this.props.description,
       price: this.props.price,
       quantity: 1
-    }]
+    }
     if(this.props.cart.length > 0) { //CART IS NOT EMPTY
       let _id = this.props._id;
       let found = this.props.cart.findIndex((item) => item._id == _id );

@@ -41,11 +41,18 @@ class Cart extends React.Component {
         this.props.updateCart(_id, -1);
     }
   }
+  getTotal(cartArray){
+    var total = cartArray.reduce((sum, item) => {
+      return sum += item.quantity * item.price
+    }, 0)
+    return total.toFixed(2);
+  }
 
   render() {
     if (this.props.cart[0]) {
       return this.renderCart();
     } else {
+
       return this.renderEmpty();
     }
   }
@@ -91,9 +98,8 @@ class Cart extends React.Component {
         {cartItemsList}
         <Row>
           <Col xs={12}>
-            <h6>
-              Total amount: {4444} $
-            </h6>
+            <h6>Total amount: {this.props.totalAmount}$</h6>
+            <h6>Items: {this.props.totalQty}</h6>
             <Button bsStyle="success" bsSize="small" onClick={this.open}>
               PROCCEED TO CHECKOUT
             </Button>
@@ -109,7 +115,7 @@ class Cart extends React.Component {
          <Modal.Footer>
            <Col xs={6}>
              <h6>
-               Total amount {1230} $
+               Total amount {this.props.totalAmount}$ 
              </h6>
            </Col>
            <Button onClick={this.close}>Close</Button>
@@ -124,7 +130,11 @@ class Cart extends React.Component {
 
 
 function mapStateToProps(state) {
-  return {cart: state.carts.cart}
+  return {
+    cart: state.carts.cart,
+    totalAmount: state.carts.totalAmount,
+    totalQty: state.carts.totalQty
+  }
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
