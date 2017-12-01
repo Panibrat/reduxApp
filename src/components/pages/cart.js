@@ -115,7 +115,7 @@ class Cart extends React.Component {
          <Modal.Footer>
            <Col xs={6}>
              <h6>
-               Total amount {this.props.totalAmount}$ 
+               Total amount {this.props.totalAmount}$
              </h6>
            </Col>
            <Button onClick={this.close}>Close</Button>
@@ -127,7 +127,6 @@ class Cart extends React.Component {
     )
   }
 }
-
 
 function mapStateToProps(state) {
   return {

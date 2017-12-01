@@ -59868,6 +59868,7 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (BooksForm.__proto__ || Object.getPrototypeOf(BooksForm)).call(this, props));
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.onDelete = _this.onDelete.bind(_this);
     return _this;
   }
 
@@ -59884,8 +59885,23 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
       this.props.postBooks(book);
     }
   }, {
+    key: 'onDelete',
+    value: function onDelete() {
+      var id = (0, _reactDom.findDOMNode)(this.refs.delete).value;
+      var bookToDelete = { _id: +id };
+      this.props.deleteBooks(bookToDelete);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var booksList = this.props.books.map(function (bookItem) {
+        return _react2.default.createElement(
+          'option',
+          { key: bookItem._id },
+          ' ',
+          bookItem._id
+        );
+      });
       return _react2.default.createElement(
         _reactBootstrap.Well,
         null,
@@ -59939,6 +59955,34 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
             { onClick: this.handleSubmit, bsStyle: 'primary' },
             'SAVE'
           )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Panel,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.FormGroup,
+            { controlId: 'formControlsSelect' },
+            _react2.default.createElement(
+              _reactBootstrap.ControlLabel,
+              null,
+              'Select book to deleteeee'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormControl,
+              { ref: 'delete', componentClass: 'select', placeholder: 'select' },
+              _react2.default.createElement(
+                'option',
+                { value: 'select' },
+                'select book\'s id to delete'
+              ),
+              booksList
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { onClick: this.onDelete, bsStyle: 'danger' },
+            'Delete book'
+          )
         )
       );
     }
@@ -59947,13 +59991,20 @@ var BooksForm = exports.BooksForm = function (_React$Component) {
   return BooksForm;
 }(_react2.default.Component);
 
+function mapStateToProps(state) {
+  return {
+    books: state.books.books
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({
-    postBooks: _booksActions.postBooks
+    postBooks: _booksActions.postBooks,
+    deleteBooks: _booksActions.deleteBooks
   }, dispatch);
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BooksForm);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BooksForm);
 
 /***/ }),
 /* 610 */
